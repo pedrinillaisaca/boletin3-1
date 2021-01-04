@@ -71,14 +71,14 @@ void detectPeatones(string ruta){
             cartToPolar(gx, gy, magnitud, angulo, true); // Pasamos a coordenas polares
             
             // Cálculo del HOG
-            //HOGDescriptor hog (Size(64,128),Size(16,16),Size(8,8),Size(8,8),9,1);
-            HOGDescriptor hog (Size(48, 96), Size(16, 16), Size(8, 8), Size(8, 8), 9);
-            //hog.setSVMDetector(HOGDescriptor::getDefaultPeopleDetector());
-            hog.setSVMDetector(HOGDescriptor::getDaimlerPeopleDetector());
+            //HOGDescriptor hog (Size(64,128),Size(16,16),Size(8,8),Size(8,8),9,1);//HOG CLASICO
+            HOGDescriptor hog (Size(48, 96), Size(16, 16), Size(8, 8), Size(8, 8), 9);//HOG CIRCULAR
+            //hog.setSVMDetector(HOGDescriptor::getDefaultPeopleDetector());//HOG CLASICO
+            hog.setSVMDetector(HOGDescriptor::getDaimlerPeopleDetector());//HOG CIRCULAR
             vector<Rect> detecciones;
             
-            //hog.detectMultiScale(framePeatones, detecciones, 0, Size(pix1,pix1), Size(pix2,pix2), 1.05, 2, false);
-            hog.detectMultiScale(framePeatones, detecciones, 0, Size(pix1,pix1), Size(pix2,pix2), 1.05, 2, true);
+            //hog.detectMultiScale(framePeatones, detecciones, 0, Size(pix1,pix1), Size(pix2,pix2), 1.05, 2, false);//HOG CLASICO
+            hog.detectMultiScale(framePeatones, detecciones, 0, Size(pix1,pix1), Size(pix2,pix2), 1.05, 2, true);//HOG CIRCULAR
             Mat clon = framePeatones.clone();            
             cout << "Numero Peatones: " << detecciones.size() << endl;
             Rect r;
@@ -108,7 +108,7 @@ void detectPeatones(string ruta){
 
               
 
-            if (waitKey(23) == 27)//Al pulsar la tecla de escape
+        if (waitKey(23) == 27)//Al pulsar la tecla de escape
                 break;            
         }
         cout<<"Prom de peatones por frame: "<< numPeatones/numframes << endl;
